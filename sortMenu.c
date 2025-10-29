@@ -119,6 +119,8 @@ void sortMenu(char names[][MAX_NAME_LENGTH],
     // Your implementation here:
     if (compare == NULL) return;
     if (prices == NULL) return;
+    if (names == NULL) return;
+    if (categories == NULL) return;
     if (count <= 1) return;
 
     int loop_iterations = 0;
