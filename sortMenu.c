@@ -136,19 +136,19 @@ void sortMenu(char names[][MAX_NAME_LENGTH],
             switch(comparator) {
                 case BY_CATEGORY:
                     if(compareByCategory(categories[i], categories[i+1]) > 0) {
-                        swap(categories[i], categories[i+1], names[i], names[i+1], prices[i], prices[i+1]);
+                        swap(categories[i], categories[i+1], names[i], names[i+1], &prices[i], &prices[i+1]);
                         swaps++;
                     }
                     break;
                 case BY_NAME:
                     if(compareByName(names[i], names[i+1]) > 0) {
-                        swap(categories[i], categories[i+1], names[i], names[i+1], prices[i], prices[i+1]);
+                        swap(categories[i], categories[i+1], names[i], names[i+1], &prices[i], &prices[i+1]);
                         swaps++;
                     }
                     break;
                 case BY_PRICE:
                     if(compareByPrice(&prices[i], &prices[i+1]) > 0) {
-                        swap(categories[i], categories[i+1], names[i], names[i+1], prices[i], prices[i+1]);
+                        swap(categories[i], categories[i+1], names[i], names[i+1], &prices[i], &prices[i+1]);
                         swaps++;
                     }
                     break;
