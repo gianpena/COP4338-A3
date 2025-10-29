@@ -95,5 +95,19 @@ void sortMenu(char names[][MAX_NAME_LENGTH],
     // Safety Tip: Check loop counter against MAX_LOOP_ITERATIONS constant
     
     // Your implementation here:
+    if (compare == NULL) return;
+    if (prices == NULL) return;
+    if (count <= 1) return;
+
+    count = count < MAX_LOOP_ITERATIONS ? count : MAX_LOOP_ITERATIONS;
+
+    // will use a BubbleSort implementation
+    int swaps = count;
+    while(swaps > 0) {
+        swaps = 0;
+        for(int i=0; i<count-1; ++i){
+            
+        }
+    }
     
 }
