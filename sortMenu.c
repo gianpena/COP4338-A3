@@ -99,14 +99,21 @@ void sortMenu(char names[][MAX_NAME_LENGTH],
     if (prices == NULL) return;
     if (count <= 1) return;
 
-    count = count < MAX_LOOP_ITERATIONS ? count : MAX_LOOP_ITERATIONS;
+    int loop_iterations = 0;
+    CompareFunction comparators[] = {compareByCategory, compareByName, compareByPrice};
+    int comparator = 0;
+    for(;comparator<3 && compare != comparators[comparator]; ++comparator);
+    if(comparator == 3) return;
 
     // will use a BubbleSort implementation
     int swaps = count;
     while(swaps > 0) {
         swaps = 0;
+        if(loop_iterations++ >= MAX_LOOP_ITERATIONS) return;
         for(int i=0; i<count-1; ++i){
+            if(loop_iterations++ >= MAX_LOOP_ITERATIONS) return;
             
+
         }
     }
     
