@@ -53,6 +53,24 @@
 #define BY_NAME 1
 #define BY_PRICE 2
 
+void swap(char *firstCategory, char *secondCategory, char *firstName, char *secondName, float *firstPrice, float *secondPrice) {
+    char tempCategory[MAX_CATEGORY_LENGTH];
+    char tempName[MAX_NAME_LENGTH];
+    float tempPrice;
+
+    strncpy(tempCategory, firstCategory, MAX_CATEGORY_LENGTH);
+    strncpy(firstCategory, secondCategory, MAX_CATEGORY_LENGTH);
+    strncpy(secondCategory, tempCategory, MAX_CATEGORY_LENGTH);
+
+    strncpy(tempName, firstName, MAX_NAME_LENGTH);
+    strncpy(firstName, secondName, MAX_NAME_LENGTH);
+    strncpy(secondName, tempName, MAX_NAME_LENGTH);
+
+    tempPrice = *firstPrice;
+    *firstPrice = *secondPrice;
+    *secondPrice = tempPrice;
+}
+
 void sortMenu(char names[][MAX_NAME_LENGTH], 
              char categories[][MAX_CATEGORY_LENGTH],
              float* prices, int count, CompareFunction compare) {
