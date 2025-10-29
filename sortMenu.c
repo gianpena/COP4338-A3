@@ -109,7 +109,6 @@ void sortMenu(char names[][MAX_NAME_LENGTH],
     int swaps = count;
     while(swaps > 0) {
         swaps = 0;
-        if(loop_iterations++ >= MAX_LOOP_ITERATIONS) return;
         for(int i=0; i<count-1; ++i){
             if(loop_iterations++ >= MAX_LOOP_ITERATIONS) return;
             
