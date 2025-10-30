@@ -49,6 +49,28 @@
 
 #include "restaurant.h"
 
+#define BY_CATEGORY 0
+#define BY_NAME 1
+#define BY_PRICE 2
+
+void swap(char *firstCategory, char *secondCategory, char *firstName, char *secondName, float *firstPrice, float *secondPrice) {
+    char tempCategory[MAX_CATEGORY_LENGTH];
+    char tempName[MAX_NAME_LENGTH];
+    float tempPrice;
+
+    strncpy(tempCategory, firstCategory, MAX_CATEGORY_LENGTH);
+    strncpy(firstCategory, secondCategory, MAX_CATEGORY_LENGTH);
+    strncpy(secondCategory, tempCategory, MAX_CATEGORY_LENGTH);
+
+    strncpy(tempName, firstName, MAX_NAME_LENGTH);
+    strncpy(firstName, secondName, MAX_NAME_LENGTH);
+    strncpy(secondName, tempName, MAX_NAME_LENGTH);
+
+    tempPrice = *firstPrice;
+    *firstPrice = *secondPrice;
+    *secondPrice = tempPrice;
+}
+
 void sortMenu(char names[][MAX_NAME_LENGTH], 
              char categories[][MAX_CATEGORY_LENGTH],
              float* prices, int count, CompareFunction compare) {
@@ -95,5 +117,48 @@ void sortMenu(char names[][MAX_NAME_LENGTH],
     // Safety Tip: Check loop counter against MAX_LOOP_ITERATIONS constant
     
     // Your implementation here:
+    if (compare == NULL) return;
+    if (prices == NULL) return;
+    if (names == NULL) return;
+    if (categories == NULL) return;
+    if (count <= 1) return;
+
+    int loop_iterations = 0;
+    CompareFunction comparators[] = {compareByCategory, compareByName, compareByPrice};
+    int comparator = 0;
+    for(;comparator<3 && compare != comparators[comparator]; ++comparator);
+    if(comparator == 3) return;
+
+    // will use a BubbleSort implementation
+    int swaps = count;
+    while(swaps > 0) {
+        swaps = 0;
+        for(int i=0; i<count-1; ++i){
+            if(loop_iterations++ >= MAX_LOOP_ITERATIONS) return;
+            switch(comparator) {
+                case BY_CATEGORY:
+                    if(compareByCategory(categories[i], categories[i+1]) > 0) {
+                        swap(categories[i], categories[i+1], names[i], names[i+1], &prices[i], &prices[i+1]);
+                        swaps++;
+                    }
+                    break;
+                case BY_NAME:
+                    if(compareByName(names[i], names[i+1]) > 0) {
+                        swap(categories[i], categories[i+1], names[i], names[i+1], &prices[i], &prices[i+1]);
+                        swaps++;
+                    }
+                    break;
+                case BY_PRICE:
+                    if(compareByPrice(&prices[i], &prices[i+1]) > 0) {
+                        swap(categories[i], categories[i+1], names[i], names[i+1], &prices[i], &prices[i+1]);
+                        swaps++;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    }
     
 }
