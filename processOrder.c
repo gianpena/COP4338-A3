@@ -47,38 +47,18 @@
 void processOrder(float* prices, int* quantities, int menuSize,
                  float* subtotal, float* tax, float* total) {
     
-    // TODO: Calculate order totals with loop safety protection
-    //
-    // 1. INPUT VALIDATION:
-    //    - Check all pointer parameters for NULL
-    //    - Validate menuSize is non-negative
-    //    - IMPORTANT: Initialize *subtotal, *tax, and *total pointers to 0.0 before early return
-                    
-    //    - Return early if validation fails
-    //
-    // 2. INITIALIZE VARIABLES:
-    //    - Declare local variable for subtotal calculation
-    //    - Declare counter variable for loop safety protection
-    //    - Initialize both appropriately
-    //
-    // 3. CALCULATE SUBTOTAL WITH SAFETY:
-    //    - Loop through all menu items
-    //    - Implement safety check: increment counter each iteration
-    //    - Break loop if counter exceeds MAX_LOOP_ITERATIONS
-    //    - For each item, check if quantity is positive
-    //    - Add price quantity to subtotal for valid items
-    //
-    // 4. CALCULATE TAX AND TOTAL:
-    //    - Calculate tax using TAX_RATE constant
-    //    - Calculate final total
-    //
-    // 5. STORE RESULTS THROUGH POINTERS:
-    //    - Use pointer dereferencing to store all calculated values
-    //    - Store subtotal, tax, and total in their respective pointer locations
-    //
-    // Pointer Assignment Tip: Use *pointer = value to store results
-    // Safety Tip: Check loop counter against MAX_LOOP_ITERATIONS constant
-    
-    // Your implementation here:
-    
+    if (!(prices && quantities && subtotal && tax && total && menuSize)) return;
+
+    float currentSubtotal = 0.0;
+    for(int i=0; i<menuSize && i<MAX_LOOP_ITERATIONS; ++i) {
+      if(quantities[i] > 0) {
+        currentSubtotal += prices[i] * quantities[i];
+      }
+    }
+
+    *subtotal = currentSubtotal;
+    float currentTax = *subtotal * TAX_RATE;
+    *tax = currentTax;
+    *total = *subtotal + *tax;
+
 }
