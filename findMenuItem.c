@@ -45,33 +45,13 @@
 #include "restaurant.h"
 
 int findMenuItem(char names[][MAX_NAME_LENGTH], int count, const char* searchName) {
-    
-    // TODO: Implement linear search with loop safety protection
-    //
-    // 1. INPUT VALIDATION:
-    //    - Check for NULL pointers (names, searchName)
-    //    - Validate count is positive
-    //    - Return ITEM_NOT_FOUND for invalid input
-    //
-    // 2. INITIALIZE VARIABLES:
-    //    - Declare counter variable for loop safety protection
-    //    - Initialize appropriately
-    //
-    // 3. LINEAR SEARCH WITH SAFETY:
-    //    - Loop through all menu items
-    //    - Implement safety check: increment counter each iteration
-    //    - Break loop if counter exceeds MAX_LOOP_ITERATIONS
-    //    - Compare current item name with searchName using strncmp()
-    //    - Return index immediately if match found (early termination)
-    //
-    // 4. RETURN RESULT:
-    //    - Return ITEM_NOT_FOUND if no match found
-    //
-    // String Safety Tips:
-    // - Use strncmp(str1, str2, max_length) for bounded comparison
-    // - strncmp() returns 0 when strings are equal
-    // Safety Tip: Check loop counter against MAX_LOOP_ITERATIONS constant
-    
-    // Your implementation here:
+
+    if(!names || !count || !searchName) return ITEM_NOT_FOUND;
+
+    for(int i=0; i<count && i<MAX_LOOP_ITERATIONS; ++i) {
+      if(strncmp(names[i], searchName, MAX_NAME_LENGTH) == 0) return i;
+    }
+
+    return ITEM_NOT_FOUND;
     
 }
