@@ -76,8 +76,16 @@ int addMenuItem(char names[][MAX_NAME_LENGTH],
     //    - Check if array has space available (use MAX_MENU_ITEMS constant)
     //    - Validate price is within acceptable range (use MIN_PRICE and MAX_PRICE constants)
     //    - Return OPERATION_FAILURE if validation fails
+    if (*count >= MAX_MENU_ITEMS)
+    {
+        return OPERATION_FAILURE;
+    }
 
     if (!(price >= MIN_PRICE && price <= MAX_PRICE && *count <= MAX_MENU_ITEMS))
+    {
+        return OPERATION_FAILURE;
+    }
+    if (strlen(name) >= MAX_NAME_LENGTH || strlen(category) >= MAX_CATEGORY_LENGTH)
     {
         return OPERATION_FAILURE;
     }
